@@ -64,14 +64,16 @@ syn region markdownAutomaticLink matchgroup=markdownUrlDelimiter start="<\%(\w\+
 " Emphasis start spans should have whitespace before and no whitespace after
 " Emphasis end spans should have no whitespace before and whitespace after
 "
-" Note: vim's "_" modifies character classes to match newlines as well
+" Vim regex notes: 
+"   "_" modifies character classes to match newlines as well.
+"   You can't use predefined ranges inside of "[]", so "[\s]" doesn't work
 "
-syn region markdownItalic start="\_s\@<=\*\S[^\*]" end="\S\@<=\*\|\*\s\@=" keepend contains=markdownLineStart
-syn region markdownItalic start="\_s\@<=_\S[^_]" end="\S\@<=_\|_\s\@=" keepend contains=markdownLineStart
-syn region markdownBold start="\_s\@<=\*\*\S[^\*]" end="\S\@<=\*\*\|\*\*\s\@=" keepend contains=markdownLineStart
-syn region markdownBold start="\_s\@<=__\S[^_]" end="\S\@<=__\|__\s\@=" keepend contains=markdownLineStart
-syn region markdownBoldItalic start="\_s\@<=\*\*\*\S[^\*]" end="\S\@<=\*\*\*\|\*\*\*\s\@=" keepend contains=markdownLineStart
-syn region markdownBoldItalic start="\_s\@<=___\S[^_]" end="\S\@<=___\|__\s\@=" keepend contains=markdownLineStart
+syn region markdownItalic start="\_s\@<=\*[^\* \t]" end="\S\@<=\*\_s" keepend contains=markdownLineStart
+syn region markdownItalic start="\_s\@<=_[^_ \t]" end="\S\@<=_\_s" keepend contains=markdownLineStart
+syn region markdownBold start="\_s\@<=\*\*[^\* \t]" end="\S\@<=\*\*\_s" keepend contains=markdownLineStart
+syn region markdownBold start="\_s\@<=__[^_ \t]" end="\S\@<=__\_s" keepend contains=markdownLineStart
+syn region markdownBoldItalic start="\_s\@<=\*\*\*[^\* \t]" end="\S\@<=\*\*\*\_s" keepend contains=markdownLineStart
+syn region markdownBoldItalic start="\_s\@<=___[^_ \t]" end="\S\@<=___\_s" keepend contains=markdownLineStart
 syn region markdownCode matchgroup=markdownCodeDelimiter start="`" end="`" transparent keepend contains=markdownLineStart
 syn region markdownCode matchgroup=markdownCodeDelimiter start="`` \=" end=" \=``" keepend contains=markdownLineStart
 
