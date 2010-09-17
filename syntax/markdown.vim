@@ -61,12 +61,17 @@ syn region markdownLink matchgroup=markdownLinkDelimiter start="(" end=")" conta
 syn region markdownId matchgroup=markdownIdDelimiter start="\[" end="\]" keepend contained
 syn region markdownAutomaticLink matchgroup=markdownUrlDelimiter start="<\%(\w\+:\|[[:alnum:]_+-]\+@\)\@=" end=">" keepend oneline
 
-syn region markdownItalic start="\S\@<=\*\|\*\S\@=" end="\S\@<=\*\|\*\S\@=" keepend contains=markdownLineStart
-syn region markdownItalic start="\S\@<=_\|_\S\@=" end="\S\@<=_\|_\S\@=" keepend contains=markdownLineStart
-syn region markdownBold start="\S\@<=\*\*\|\*\*\S\@=" end="\S\@<=\*\*\|\*\*\S\@=" keepend contains=markdownLineStart
-syn region markdownBold start="\S\@<=__\|__\S\@=" end="\S\@<=__\|__\S\@=" keepend contains=markdownLineStart
-syn region markdownBoldItalic start="\S\@<=\*\*\*\|\*\*\*\S\@=" end="\S\@<=\*\*\*\|\*\*\*\S\@=" keepend contains=markdownLineStart
-syn region markdownBoldItalic start="\S\@<=___\|___\S\@=" end="\S\@<=___\|___\S\@=" keepend contains=markdownLineStart
+" Emphasis start spans should have whitespace before and no whitespace after
+" Emphasis end spans should have no whitespace before and whitespace after
+"
+" Note: vim's "_" modifies character classes to match newlines as well
+"
+syn region markdownItalic start="\_s\@<=\*\S[^\*]" end="\S\@<=\*\|\*\s\@=" keepend contains=markdownLineStart
+syn region markdownItalic start="\_s\@<=_\S[^_]" end="\S\@<=_\|_\s\@=" keepend contains=markdownLineStart
+syn region markdownBold start="\_s\@<=\*\*\S[^\*]" end="\S\@<=\*\*\|\*\*\s\@=" keepend contains=markdownLineStart
+syn region markdownBold start="\_s\@<=__\S[^_]" end="\S\@<=__\|__\s\@=" keepend contains=markdownLineStart
+syn region markdownBoldItalic start="\_s\@<=\*\*\*\S[^\*]" end="\S\@<=\*\*\*\|\*\*\*\s\@=" keepend contains=markdownLineStart
+syn region markdownBoldItalic start="\_s\@<=___\S[^_]" end="\S\@<=___\|__\s\@=" keepend contains=markdownLineStart
 syn region markdownCode matchgroup=markdownCodeDelimiter start="`" end="`" transparent keepend contains=markdownLineStart
 syn region markdownCode matchgroup=markdownCodeDelimiter start="`` \=" end=" \=``" keepend contains=markdownLineStart
 
