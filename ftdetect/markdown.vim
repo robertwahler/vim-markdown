@@ -6,6 +6,6 @@ autocmd BufNewFile,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
       \ endif
 " Text files with the second line H1 header "==============" 
 autocmd BufNewFile,BufRead *.txt 
-      \ if getline(2) =~ '^=*$'  |
+      \ if getline(2) =~ '^=\+$'  |
       \   setfiletype markdown |
       \ endif
