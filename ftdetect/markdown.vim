@@ -4,8 +4,10 @@ autocmd BufNewFile,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
       \ else |
       \   setf markdown |
       \ endif
-" Text files with the second line H1 header "==============" 
-autocmd BufNewFile,BufRead *.txt 
-      \ if getline(2) =~ '^=\+$'  |
-      \   setfiletype markdown |
+" Text files with the second line H1 header "==============" on filetypes that are not set
+autocmd BufNewFile,BufRead *
+      \ if &ft  == '' |
+        \ if getline(2) =~ '^=\+$'  |
+        \   setfiletype markdown |
+        \ endif |
       \ endif
